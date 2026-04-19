@@ -3,6 +3,9 @@ dist/
 build/
 *.spec
 
+# Installer output
+installer_output/
+
 # Saved presets (user-specific)
 presets.json
 
