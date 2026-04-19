@@ -4,6 +4,45 @@ A feature-rich auto clicker with a dark-themed GUI, preset system, and record-to
 
 ---
 
+## Quickstart
+
+### Just want to use it? (No Python required)
+
+1. Go to the [Releases](../../releases) page
+2. Download `AutoClicker.exe`
+3. Double-click it — done
+
+> Works on any Windows PC. No installation, no Python, no setup.
+
+---
+
+### Want to run from source?
+
+**Step 1 — Install Python**
+Download from [python.org](https://www.python.org/downloads/) and check **"Add Python to PATH"** during setup.
+
+**Step 2 — Install the one dependency**
+```
+pip install pynput
+```
+
+**Step 3 — Run the app**
+```
+python autoclicker.py
+```
+Or double-click `run.bat` — it installs `pynput` automatically and launches the app.
+
+---
+
+### Want to build the exe yourself?
+
+```
+build.bat
+```
+This installs PyInstaller, compiles everything, and puts `AutoClicker.exe` in the `dist\` folder.
+
+---
+
 ## Features
 
 | Feature | Details |
