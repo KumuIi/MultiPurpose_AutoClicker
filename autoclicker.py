@@ -236,11 +236,37 @@ class AutoClickerApp:
     # ── UI ────────────────────────────────────────────────────────────────────
 
     def _build_ui(self):
-        self.root.geometry("450x760")
-        wrap = ttk.Frame(self.root, padding=10)
-        wrap.pack(fill="both", expand=True)
+        self.root.geometry("450x700")
+
+        # Outer frame holds canvas + scrollbar
+        outer = tk.Frame(self.root, bg=BG)
+        outer.pack(fill="both", expand=True)
+
+        self._main_canvas = tk.Canvas(outer, bg=BG, highlightthickness=0)
+        vsb = ttk.Scrollbar(outer, orient="vertical", command=self._main_canvas.yview)
+        self._main_canvas.configure(yscrollcommand=vsb.set)
+        vsb.pack(side="right", fill="y")
+        self._main_canvas.pack(side="left", fill="both", expand=True)
+
+        # Inner frame is the real content container
+        wrap = ttk.Frame(self._main_canvas, padding=10)
+        self._wrap_window = self._main_canvas.create_window((0, 0), window=wrap, anchor="nw")
+
+        wrap.bind("<Configure>", self._on_wrap_configure)
+        self._main_canvas.bind("<Configure>", self._on_canvas_configure)
+        self._main_canvas.bind("<MouseWheel>",
+            lambda e: self._main_canvas.yview_scroll(-1*(e.delta//120), "units"))
+        wrap.bind("<MouseWheel>",
+            lambda e: self._main_canvas.yview_scroll(-1*(e.delta//120), "units"))
+
         self._build_presets_panel(wrap)
         self._build_editor(wrap)
+
+    def _on_wrap_configure(self, _event):
+        self._main_canvas.configure(scrollregion=self._main_canvas.bbox("all"))
+
+    def _on_canvas_configure(self, event):
+        self._main_canvas.itemconfig(self._wrap_window, width=event.width)
 
     # ── Presets panel ─────────────────────────────────────────────────────────
 
@@ -297,6 +323,12 @@ class AutoClickerApp:
                    command=self._duplicate_editing).pack(side="right", padx=(6, 0))
         ttk.Button(foot, text="Save Preset", style="Save.TButton",
                    command=self._save_editing).pack(side="right")
+
+    def _bind_scroll(self, widget):
+        widget.bind("<MouseWheel>",
+            lambda e: self._main_canvas.yview_scroll(-1*(e.delta//120), "units"))
+        for child in widget.winfo_children():
+            self._bind_scroll(child)
 
     def _section(self, parent, title: str) -> tk.Frame:
         outer = ttk.Frame(parent)

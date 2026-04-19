@@ -1,0 +1,12 @@
+# PyInstaller output
+dist/
+build/
+*.spec
+
+# Saved presets (user-specific)
+presets.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

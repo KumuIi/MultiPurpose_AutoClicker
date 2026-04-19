@@ -20,24 +20,44 @@ A feature-rich auto clicker with a dark-themed GUI, preset system, and record-to
 
 ---
 
-## Requirements
+## Getting started
 
-- Python 3.10 or newer
-- [`pynput`](https://pypi.org/project/pynput/) — installed automatically on first run, or manually with:
+### Option A — Standalone executable (no Python needed)
+
+1. Install [Python](https://www.python.org/downloads/) — check **"Add Python to PATH"** during setup.
+2. Run `build.bat` — it installs PyInstaller and compiles everything into a single file.
+3. Find `dist\AutoClicker.exe` and double-click it. No Python, no pip, nothing else needed.
+
+> Share or copy that `.exe` to any Windows PC and it will just work.
+
+### Option B — Run from source
+
+Requires Python 3.10 or newer installed with pip available.
+
+1. Install the one dependency:
 
 ```
 pip install pynput
 ```
 
----
-
-## How to run
-
-Double-click `run.bat`, or from a terminal:
+2. Run the app:
 
 ```
 python autoclicker.py
 ```
+
+Or double-click `run.bat` — it installs `pynput` automatically and launches the app.
+
+---
+
+## Dependencies
+
+| Package | What it does | Bundled in exe? |
+|---|---|---|
+| `pynput` | Global mouse/keyboard control and listening | Yes |
+| `tkinter` | GUI framework | Yes (ships with Python) |
+
+There are no other dependencies. Everything else used (`threading`, `json`, `uuid`, etc.) is part of the Python standard library.
 
 ---
 
