@@ -31,7 +31,13 @@ RED     = "#f38ba8"
 ORANGE  = "#fab387"
 YELLOW  = "#f9e2af"
 
-PRESET_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "presets.json")
+def _appdata_dir() -> str:
+    base = os.environ.get("APPDATA") or os.path.expanduser("~")
+    path = os.path.join(base, "AutoClicker")
+    os.makedirs(path, exist_ok=True)
+    return path
+
+PRESET_FILE = os.path.join(_appdata_dir(), "presets.json")
 
 PYNPUT_BTN   = {"left": Button.left, "right": Button.right, "middle": Button.middle}
 BUTTON_LABEL = {"left": "Left Click", "right": "Right Click", "middle": "Middle Click"}

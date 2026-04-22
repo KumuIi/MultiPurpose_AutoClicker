@@ -29,7 +29,7 @@ Source: "dist\AutoClicker.exe"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
 Name: "{group}\AutoClicker";           Filename: "{app}\AutoClicker.exe"; IconFilename: "{app}\AutoClicker.exe"
 Name: "{group}\Uninstall AutoClicker"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\AutoClicker";   Filename: "{app}\AutoClicker.exe"; IconFilename: "{app}\AutoClicker.exe"; Tasks: desktopicon
+Name: "{userdesktop}\AutoClicker";     Filename: "{app}\AutoClicker.exe"; IconFilename: "{app}\AutoClicker.exe"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\AutoClicker.exe"; \
